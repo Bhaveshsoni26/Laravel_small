@@ -31,7 +31,7 @@
                         @foreach($users as $user)
                         <tr>
                             <td>{{ $user->id }}</td>
-                            <td>{{ $user->username }}</td>
+                            <td><a href="{{ route('users.info', $user->id) }}">{{ $user->username }}</a></td>
                             <td>
                                 <img height="50px" src="{{ $user->avatar }}" alt="">
                             </td>
@@ -48,8 +48,8 @@
                                             <i class="fa fa-trash"></i>
                                         </button>
                                     </form>
-                                    <a href="{{ route('users.info', $user->id) }}" class="btn btn-success btn-sm ml-1">
-                                        <i class="fa fa-eye"></i>
+                                    <a href="{{ route('user.profile.show', $user->id) }}" class="btn btn-success btn-sm ml-1">
+                                        <i class="fa-solid fa-pencil"></i>
                                     </a>
                                 </div>
                             </td>

@@ -19,6 +19,7 @@
 
   <!-- Custom styles for this template-->
   <link href="{{ asset('css/sb-admin-2.css') }}" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"> -->
   @yield('style')
 
 </head>
@@ -65,6 +66,8 @@
           <x-admin.sidebar.admin-sidebar-users-link></x-admin.sidebar.admin-sidebar-users-link>
             
         @endif
+
+        <x-admin.sidebar.admin-sidebar-authorized-links></x-admin.sidebar.admin-sidebar-authorized-links>
 
       <!-- Nav Item - Utilities Collapse Menu -->
       <li class="nav-item">
@@ -346,6 +349,8 @@
   <script src="{{ asset('js/sb-admin-2.js') }}"></script>
 
   <script src="https://kit.fontawesome.com/e5c91c30a0.js" crossorigin="anonymous"></script>
+
+  <!-- <script src="{{ asset('vendor/flasher/jquery.min.js') }}"></script> -->
 
   @yield('script')
 

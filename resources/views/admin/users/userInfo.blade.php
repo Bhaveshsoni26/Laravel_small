@@ -6,6 +6,11 @@
         <h1>
             User Profile Info
         </h1>
+        <h5>Roles: 
+            @foreach($user->roles as $role)
+            <span class="badge badge-primary"> {{ $role->name }} </span>
+            @endforeach
+        </h5>
     </center>
 
 

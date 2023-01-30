@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Role;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Yoeunes\Toastr\Facades\Toastr;
 
 class UserController extends Controller
 {
@@ -17,7 +19,12 @@ class UserController extends Controller
 
     public function show(User $user)
     {
-        return view('admin.users.profile', ['user'=>$user]);
+        return view('admin.users.profile', [
+            'user'=>$user,
+            'roles'=>Role::all(),
+        
+        
+        ]);
         
     }
 
@@ -45,18 +52,35 @@ class UserController extends Controller
 
         return back();
     }
+    public function attach(User $user)
+    {
+        $user->roles()->attach(request('role'));
+
+        return back();
+    }
 
     public function destroy(User $user)
     {
         $user->delete();
 
-        session()->flash('user-deleted', 'User has been deleted');
+        // session()->flash('user-deleted', 'User has been deleted');
+        Toastr::warning('User Deleted');
+
+        return back();
+    }
+
+    public function detach(User $user)
+    {
+        $user->roles()->detach(request('role'));
 
         return back();
     }
 
     public function info(User $user)
     {
-        return view('admin.users.userInfo', ['user'=>$user]);
+        return view('admin.users.userInfo', [
+            'user'=>$user,
+            'roles'=>$user->roles(),
+        ]);
     }
 }

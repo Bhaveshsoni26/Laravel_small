@@ -6,6 +6,7 @@ use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Yoeunes\Toastr\Facades\Toastr;
 
 class PostController extends Controller
 {
@@ -50,7 +51,8 @@ class PostController extends Controller
         }
         auth()->user()->posts()->create($inputs);
 
-        session()->flash('post-created-message', 'Post Created');
+        // session()->flash('post-created-message', 'Post Created');
+        Toastr::success('Post created successfully');
 
         return redirect()->route('post.index');
     }
@@ -59,7 +61,8 @@ class PostController extends Controller
     {
         $post->delete();
 
-        $request->session()->flash('message','Post was deleted');
+        Toastr::warning('Post was deleted');
+        // $request->session()->flash('message','Post was deleted');
 
         return back();
     }
@@ -89,8 +92,8 @@ class PostController extends Controller
            
         $post->update();
         
-
-        session()->flash('post-updated-message', 'Post Updated');
+        Toastr::info('Post Updated');
+        // session()->flash('post-updated-message', 'Post Updated');
 
         return redirect()->route('post.index');
     }

@@ -32,7 +32,7 @@
                     <label for="name">Name</label>
                     <input type="text" 
                            name="name" 
-                           class="form-control" 
+                           class="form-control @error('name') is-invalid @enderror"" 
                            id="name" 
                            value="{{ $user->name }}">
                         @error('name')
@@ -77,8 +77,84 @@
                         @enderror
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary mb-3">Submit</button>
             </form>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+        <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-primary">Roles</h6>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+          <thead>
+            <tr>
+                <th width="8%">Options</th>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Slug</th>
+                <th width="20%">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            @foreach($roles as $role)
+                <tr>
+                    <td><input type="checkbox" 
+                                @foreach($user->roles as $user_role)
+                                    @if($user_role->slug == $role->slug)
+                                        checked
+                                    @endif
+                                @endforeach>
+                    </td>
+                    <td>{{ $role->id }}</td>
+                    <td>{{ $role->name }}</td>
+                    <td>{{ $role->slug }}</td>
+                    <td>
+                        <div class="d-flex">
+                        <form action="{{ route('user.role.attach',$user) }}" method="post">
+                        @csrf
+                        @method('PUT')
+
+                            <input type="hidden" name="role" value="{{ $role->id }}">
+
+                            <button type="submit" class="btn btn-primary btn-sm mr-1"
+                                        @if($user->roles->contains($role))
+                                            disabled
+                                        @endif>
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </form>
+
+                        <form action="{{ route('user.role.detach',$user) }}" method="post">
+                        @csrf
+                        @method('PUT')
+
+                            <input type="hidden" name="role" value="{{ $role->id }}">
+
+                            <button type="submit" class="btn btn-danger btn-sm mr-1"
+                                        @if(!$user->roles->contains($role))
+                                            disabled
+                                        @endif
+                                    >
+                                <i class="fa-solid fa-minus"></i>
+                            </button>
+                        </form>
+                        </div>
+                        <!-- <button type="submit" class="btn btn-danger btn-sm ml-1">
+                            <i class="fa-solid fa-minus"></i>
+                        </button>   -->
+                    </td>              
+                </tr>
+            @endforeach
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
         </div>
     </div>
     @endsection
