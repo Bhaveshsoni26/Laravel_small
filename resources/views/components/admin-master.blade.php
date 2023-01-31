@@ -16,6 +16,7 @@
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
   <!-- Custom styles for this template-->
   <link href="{{ asset('css/sb-admin-2.css') }}" rel="stylesheet">
@@ -67,7 +68,13 @@
             
         @endif
 
+        @if(auth()->user()->userHasRole('Admin'))
+
         <x-admin.sidebar.admin-sidebar-authorized-links></x-admin.sidebar.admin-sidebar-authorized-links>
+            
+        @endif
+
+        
 
       <!-- Nav Item - Utilities Collapse Menu -->
       <li class="nav-item">

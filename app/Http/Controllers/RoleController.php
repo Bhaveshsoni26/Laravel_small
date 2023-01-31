@@ -80,11 +80,19 @@ class RoleController extends Controller
             toastr()->warning('Not Change Anything');
             return back();
         }
+    }
 
-        
+    public function attach_permission(Role $role)
+    {
+        $role->permission()->attach(request('permission'));       
 
-        
+        return back();
+    }
 
-        
+    public function detach_permission(Role $role)
+    {
+        $role->permission()->detach(request('permission'));
+
+        return back();
     }
 }

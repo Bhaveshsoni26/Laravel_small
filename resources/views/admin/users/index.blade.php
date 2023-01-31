@@ -63,7 +63,7 @@
 
 
     <div class="d-flex">
-        <div class="mx-auto">
+        <div class="pagination justify-content-center mx-auto">
             {{ $users->links() }}
         </div>
     </div>

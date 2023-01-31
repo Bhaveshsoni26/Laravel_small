@@ -12,8 +12,9 @@
 
   <!-- Bootstrap core CSS -->
   <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
   <!-- Custom styles for this template -->
   <link href="{{ asset('css/blog-home.css') }}" rel="stylesheet">
@@ -75,14 +76,14 @@
     <div class="row">
 
       <!-- Blog Entries Column -->
-      <div class="col-md-8">
-
-        @yield('content')
-
+      <div class="col-md-8 pl-0">
+        <div>
+          @yield('content')
+        </div>
       </div>
 
       <!-- Sidebar Widgets Column -->
-      <div class="col-md-4">
+      <div class="col-md-4 pr-0">
 
         <!-- Search Widget -->
         <div class="card my-4">
@@ -149,7 +150,7 @@
   <!-- /.container -->
 
   <!-- Footer -->
-  <footer class="py-5 bg-dark">
+  <footer class="py-3 bg-dark">
     <div class="container">
       <p class="m-0 text-center text-white">Copyright &copy; Bhavesh Soni 2023</p>
     </div>
@@ -158,7 +159,11 @@
 
   <!-- Bootstrap core JavaScript -->
   <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+  <script>
+    AOS.init();
+  </script>
 
 </body>
 

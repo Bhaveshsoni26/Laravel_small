@@ -35,8 +35,8 @@
                 <label for="email">Email</label>
                 <input type="text" name="email" class="form-control" id="email" value="{{ $user->email }}" readonly>
             </div>
-            <div class="my-4 text-center">
-                <a href="{{route('users.index')}}" class="btn btn-outline-primary">Back</a>
+            <div class="my-4 text-center">   
+                <a href="{{ url()->previous() }}" class="btn btn-outline-primary">Back</a>
             </div>
         </div>
     </div>
