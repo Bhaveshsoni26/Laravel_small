@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Permission;
 use App\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Facade;
 use Yoeunes\Toastr\Facades\Toastr;
+use Yoeunes\Toastr\Toastr as ToastrToastr;
 
 class RoleController extends Controller
 {
@@ -45,7 +47,11 @@ class RoleController extends Controller
 
     public function edit(Role $role)
     {
-        return view('admin.roles.edit',['role'=>$role]);
+        // dd(Permission::all());
+        return view('admin.roles.edit',[
+            'role'=>$role,
+            'permissions'=>Permission::all()
+        ]);
     }
 
     public function update(Role $role)
@@ -57,15 +63,28 @@ class RoleController extends Controller
         $role->name = Str::ucfirst(request('name'));
         $role->slug = Str::lower(request('name'));
 
-        $role->save();
+        if ($role->isDirty('name')) {
 
-        Toastr::success('Role has been updated', 'Update',[
-            'showEasing'=>'linear',
-            'hideEasing'=>'swing',
-            'showMethod'=>'fadeIn',
-            'hideMethod'=>'fadeOut'
-        ]);
+            Toastr::success('Role has been updated', 'Update',[
+                'showEasing'=>'linear',
+                'hideEasing'=>'swing',
+                'showMethod'=>'fadeIn',
+                'hideMethod'=>'fadeOut'
+            ]);
 
-        return redirect()->route('roles.index');
+            $role->save();
+            return redirect()->route('roles.index');
+        }
+
+        else{
+            toastr()->warning('Not Change Anything');
+            return back();
+        }
+
+        
+
+        
+
+        
     }
 }
